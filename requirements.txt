@@ -1,0 +1,7 @@
+colorama
+psutil 
+platform 
+distro
+cpuinfo
+os
+subprocess
