@@ -27,7 +27,7 @@ if pacmanexists==True:
     pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
     pnum=len(pcmd.splitlines())
 elif aptexists==True:
-    pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
+    pcmd=check_output(['apt' , 'list']).decode('utf-8')
     pnum=len(pcmd.splitlines())
 elif dnfexists==True:
     pcmd=check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
