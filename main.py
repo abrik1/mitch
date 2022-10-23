@@ -7,32 +7,37 @@ from distro import name,version
 from cpuinfo import get_cpu_info
 from os.path import isfile
 from subprocess import check_output
+from os import getlogin
+from socket import gethostname
 
+user=getlogin()
+hostname=gethostname()
 totalramus=virtual_memory()[3]/1000000
 totalram=virtual_memory().total/1000000
-hostfile=open('/proc/sys/kernel/hostname')
-hostname=hostfile.read()
 distro=name()
 cpuarch=machine()
 cpuname=get_cpu_info()['brand_raw']
 kernver=release()
 pathapt="/usr/bin/apt"
 pathdnf="/usr/bin/dnf"
+pathsnap="/usr/bin/snap"
 pathpacman="/usr/bin/pacman"
 aptexists=isfile(pathapt)
 pacmanexists=isfile(pathpacman)
 dnfexists=isfile(pathdnf)
+snapexists=isfile(pathsnap)
 
 if pacmanexists==True:
     pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
     pnum=len(pcmd.splitlines())
 elif aptexists==True:
-    pcmd=check_output(['apt' , 'list' , '--installed']).decode('utf-8')
+    pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
     pnum=len(pcmd.splitlines())
 elif dnfexists==True:
     pcmd=check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
     pnum=len(pcmd.splitlines())
 
+print(' '+str(user)+str('@')+str(hostname))
 print(colorama.Fore.RED , " Distro:-" , colorama.Fore.WHITE , distro + " " + cpuarch)
 print(colorama.Fore.GREEN , " CPU:-" , colorama.Fore.WHITE, cpuname )
 print(colorama.Fore.BLUE , " Kernel:-" , colorama.Fore.WHITE , kernver)
