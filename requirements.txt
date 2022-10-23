@@ -2,6 +2,6 @@ colorama
 psutil 
 platform 
 distro
-cpuinfo
+py-cpuinfo
 os
 subprocess
