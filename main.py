@@ -7,7 +7,7 @@ from distro import name,version
 from cpuinfo import get_cpu_info
 from os.path import isfile
 from subprocess import check_output
-from os import getlogin
+from os import getlogin , getenv
 from socket import gethostname
 
 user=getlogin()
@@ -18,14 +18,14 @@ distro=name()
 cpuarch=machine()
 cpuname=get_cpu_info()['brand_raw']
 kernver=release()
+sh=getenv('SHELL')
+de=getenv('DESKTOP_SESSION')
 pathapt="/usr/bin/apt"
 pathdnf="/usr/bin/dnf"
-pathsnap="/usr/bin/snap"
 pathpacman="/usr/bin/pacman"
 aptexists=isfile(pathapt)
 pacmanexists=isfile(pathpacman)
 dnfexists=isfile(pathdnf)
-snapexists=isfile(pathsnap)
 
 if pacmanexists==True:
     pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
@@ -35,14 +35,17 @@ elif aptexists==True:
     pnum=len(pcmd.splitlines())
 elif dnfexists==True:
     pcmd=check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
-    pnum=len(pcmd.splitlines())
+    pnum=len(pcmd.splitlines())  
 
-print(' '+str(user)+str('@')+str(hostname))
-print(colorama.Fore.RED , " Distro:-" , colorama.Fore.WHITE , distro + " " + cpuarch)
-print(colorama.Fore.GREEN , " CPU:-" , colorama.Fore.WHITE, cpuname )
-print(colorama.Fore.BLUE , " Kernel:-" , colorama.Fore.WHITE , kernver)
-print(colorama.Fore.YELLOW , " Packages:-" , colorama.Fore.WHITE , pnum )
-print(colorama.Fore.MAGENTA , " Memory:-" , colorama.Fore.WHITE , str(int(totalramus))+str('MB') + str('/') + str(int(totalram))+str('MB '))
+print('',' '+"\u001b[4m"+str(user)+str('@')+str(hostname)+'\u001b[0m')
+print('',colorama.Fore.RED , " Distro:-" , colorama.Fore.WHITE , distro + " " + cpuarch)
+print('',colorama.Fore.GREEN , " CPU:-" , colorama.Fore.WHITE, cpuname )
+print('',colorama.Fore.BLUE , " Kernel:-" , colorama.Fore.WHITE , kernver)
+print('',colorama.Fore.YELLOW , " Packages:-" , colorama.Fore.WHITE , pnum)
+print('',colorama.Fore.CYAN , " Desktop Enviroment:-" , colorama.Fore.WHITE , de)
+print('',colorama.Fore.MAGENTA , " Memory:-" , colorama.Fore.WHITE , str(int(totalramus))+str('MB') + str('/') + str(int(totalram))+str('MB '))
+print('',colorama.Fore.WHITE , " Shell:-" , colorama.Fore.WHITE , sh)
 
 print()
-print(colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
+print(colorama.Style.NORMAL,colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
+print(colorama.Style.BRIGHT , colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
