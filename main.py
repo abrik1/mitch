@@ -47,5 +47,5 @@ print('',colorama.Fore.MAGENTA , " Memory:-" , colorama.Fore.WHITE , str(int(
 print('',colorama.Fore.WHITE , " Shell:-" , colorama.Fore.WHITE , sh)
 
 print()
-print(colorama.Style.NORMAL,colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
-print(colorama.Style.BRIGHT , colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
+print(colorama.Style.NORMAL,colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , ' ')
+print(colorama.Style.BRIGHT , colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , ' ')
