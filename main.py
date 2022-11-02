@@ -20,6 +20,7 @@ cpuname=get_cpu_info()['brand_raw']
 kernver=release()
 sh=getenv('SHELL')
 de=getenv('DESKTOP_SESSION')
+pathapk="/usr/bin/apk"
 pathapt="/usr/bin/apt"
 pathdnf="/usr/bin/dnf"
 pathpacman="/usr/bin/pacman"
@@ -30,6 +31,9 @@ dnfexists=isfile(pathdnf)
 if pacmanexists==True:
     pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
     pnum=len(pcmd.splitlines())
+elif apkexists==True:    
+    pcmd=check_output(['apk' , 'list' , '--installed']).decode('utf-8')
+    pnum=len(pcmd.splitlines())    
 elif aptexists==True:
     pcmd=check_output(['apt' , 'list' , '--installed']).decode('utf-8')
     pnum=len(pcmd.splitlines())
@@ -38,14 +42,14 @@ elif dnfexists==True:
     pnum=len(pcmd.splitlines())  
 
 print('',' '+"\u001b[4m"+str(user)+str('@')+str(hostname)+'\u001b[0m')
-print('',colorama.Fore.RED , " Distro:-" , colorama.Fore.WHITE , distro + " " + cpuarch)
-print('',colorama.Fore.GREEN , " CPU:-" , colorama.Fore.WHITE, cpuname )
-print('',colorama.Fore.BLUE , " Kernel:-" , colorama.Fore.WHITE , kernver)
-print('',colorama.Fore.YELLOW , " Packages:-" , colorama.Fore.WHITE , pnum)
-print('',colorama.Fore.CYAN , " Desktop Enviroment:-" , colorama.Fore.WHITE , de)
-print('',colorama.Fore.MAGENTA , " Memory:-" , colorama.Fore.WHITE , str(int(totalramus))+str('MB') + str('/') + str(int(totalram))+str('MB '))
-print('',colorama.Fore.WHITE , " Shell:-" , colorama.Fore.WHITE , sh)
+print('',colorama.Fore.RED , " Distro:-" , colorama.Fore.RESET , distro + " " + cpuarch)
+print('',colorama.Fore.GREEN , " CPU:-" , colorama.Fore.RESET, cpuname )
+print('',colorama.Fore.BLUE , " Kernel:-" , colorama.Fore.RESET , kernver)
+print('',colorama.Fore.YELLOW , " Packages:-" , colorama.Fore.RESET , pnum)
+print('',colorama.Fore.CYAN , " Desktop Enviroment:-" , colorama.Fore.RESET , de)
+print('',colorama.Fore.MAGENTA , " Memory:-" , colorama.Fore.RESET , str(int(totalramus))+str('MB') + str('/') + str(int(totalram))+str('MB '))
+print('',colorama.Fore.WHITE , " Shell:-" , colorama.Fore.RESET , sh)
 
 print()
-print(colorama.Style.NORMAL,colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
-print(colorama.Style.BRIGHT , colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , '')
+print(colorama.Style.NORMAL,colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , ' ')
+print(colorama.Style.BRIGHT , colorama.Fore.RED,'' , colorama.Fore.GREEN , '' , colorama.Fore.BLUE , '' , colorama.Fore.YELLOW , '' ,colorama.Fore.CYAN , '',colorama.Fore.MAGENTA , '' , colorama.Fore.WHITE , ' ')
