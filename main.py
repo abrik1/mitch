@@ -10,36 +10,37 @@ from subprocess import check_output
 from os import getlogin , getenv
 from socket import gethostname
 
-user=getlogin()
-hostname=gethostname()
-totalramus=virtual_memory()[3]/1000000
-totalram=virtual_memory().total/1000000
-distro=name()
-cpuarch=machine()
-cpuname=get_cpu_info()['brand_raw']
-kernver=release()
-sh=getenv('SHELL')
-de=getenv('DESKTOP_SESSION')
-pathapk="/usr/bin/apk"
-pathapt="/usr/bin/apt"
-pathdnf="/usr/bin/dnf"
-pathpacman="/usr/bin/pacman"
-aptexists=isfile(pathapt)
-pacmanexists=isfile(pathpacman)
-dnfexists=isfile(pathdnf)
+user = getlogin()
+hostname = gethostname()
+totalramus = virtual_memory()[3]/1000000
+totalram = virtual_memory().total/1000000
+distro = name()
+cpuarch = machine()
+cpuname = get_cpu_info()['brand_raw']
+kernver = release()
+sh = getenv('SHELL')
+de = getenv('DESKTOP_SESSION')
+pathapk = "/usr/bin/apk"
+pathapt = "/usr/bin/apt"
+pathdnf = "/usr/bin/dnf"
+pathpacman = "/usr/bin/pacman"
+aptexists = isfile(pathapt)
+apkexists = isfile(pathapk)
+pacmanexists = isfile(pathpacman)
+dnfexists = isfile(pathdnf)
 
-if pacmanexists==True:
-    pcmd=check_output(['pacman' , '-Q']).decode('utf-8')
-    pnum=len(pcmd.splitlines())
-elif apkexists==True:    
-    pcmd=check_output(['apk' , 'list' , '--installed']).decode('utf-8')
-    pnum=len(pcmd.splitlines())    
-elif aptexists==True:
-    pcmd=check_output(['apt' , 'list' , '--installed']).decode('utf-8')
-    pnum=len(pcmd.splitlines())
-elif dnfexists==True:
-    pcmd=check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
-    pnum=len(pcmd.splitlines())  
+if pacmanexists == True:
+    pcmd = check_output(['pacman' , '-Q']).decode('utf-8')
+    pnum = len(pcmd.splitlines())
+elif apkexists == True:    
+    pcmd = check_output(['apk' , 'list' , '--installed']).decode('utf-8')
+    pnum = len(pcmd.splitlines())    
+elif aptexists == True:
+    pcmd = check_output(['apt' , 'list' , '--installed']).decode('utf-8')
+    pnum = len(pcmd.splitlines())
+elif dnfexists == True:
+    pcmd = check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
+    pnum = len(pcmd.splitlines())  
 
 print('',' '+"\u001b[4m"+str(user)+str('@')+str(hostname)+'\u001b[0m')
 print('',colorama.Fore.RED , " Distro:-" , colorama.Fore.RESET , distro + " " + cpuarch)
