@@ -5,3 +5,4 @@ distro
 py-cpuinfo
 os
 subprocess
+pyfiglet
