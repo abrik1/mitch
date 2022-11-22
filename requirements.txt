@@ -1,7 +1,0 @@
-colorama
-psutil 
-platform 
-distro
-py-cpuinfo
-os
-subprocess
