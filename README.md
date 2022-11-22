@@ -3,7 +3,7 @@ A simple fetch tool which is light and very customizable
 
 # Looks:-
 
-![master](src/mitch.png)
+![testing](src/mitch.png)
 
 # Future Plans:-
 
