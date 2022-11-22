@@ -56,6 +56,7 @@ def ascii_art(distro):
         artprint = f"{colorama.Fore.RED} {asciiart} {colorama.Fore.RESET}"
     elif distro=="Alpine Linux" or distro=="Arco Linux" or distro=="Fedora Linux":
         artprint = f"{colorama.Fore.BLUE} {asciiart} {colorama.Fore.RESET}"
+        
 ascii_art(distro)
 print(artprint)
 
