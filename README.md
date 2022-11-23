@@ -5,10 +5,11 @@ A simple fetch tool which is light and very customizable
 
 ![testing](src/mitch.png)
 
-# Future Plans:-
+# Current features:-
 
-Add more package managers
+- ASCII Art
+- Shows System Information in a beautiful format
 
-Add GPU
+# Future:-
 
-Add current running window manager
+- Pass arguements...
