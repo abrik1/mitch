@@ -25,6 +25,7 @@ pathapk = "/usr/bin/apk"
 pathapt = "/usr/bin/apt"
 pathdnf = "/usr/bin/dnf"
 pathpacman = "/usr/bin/pacman"
+pathxbps = "/usr/bin/xbps"
 aptexists = isfile(pathapt)
 apkexists = isfile(pathapk)
 pacmanexists = isfile(pathpacman)
@@ -42,7 +43,10 @@ elif aptexists == True:
 elif dnfexists == True:
     pcmd = check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
     pnum = len(pcmd.splitlines())  
-
+elif xbpsexists == True:
+    pcmd = check_output(['xbps-query' , '-l']).decode('utf-8')
+    pnum = len(pcmd.splitlines())
+    
 def ascii_art(distro):
     global asciiart , artprint
     asciiart = figlet_format(text=f"  {distro}")
@@ -54,8 +58,10 @@ def ascii_art(distro):
         artprint = f"{colorama.Fore.MAGENTA} {asciiart} {colorama.Fore.RESET}"
     elif distro=="Ubuntu" or distro=="Debian":
         artprint = f"{colorama.Fore.RED} {asciiart} {colorama.Fore.RESET}"
-    elif distro=="Alpine Linux" or distro=="Arco Linux" or distro=="Fedora Linux":
+    elif distro=="Alpine Linux" or distro=="ArcoLinux" or distro=="Fedora Linux":
         artprint = f"{colorama.Fore.BLUE} {asciiart} {colorama.Fore.RESET}"
+    else:
+        artprint = f"{asciiart}"
         
 ascii_art(distro)
 print(artprint)
