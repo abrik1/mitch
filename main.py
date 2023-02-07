@@ -1,6 +1,7 @@
 #Dependencies
 
-import colorama
+from rich.console import Console
+from rich.table import Table
 from psutil import virtual_memory
 from platform import machine, release
 from distro import name,version
@@ -11,6 +12,7 @@ from os import getlogin , getenv
 from socket import gethostname
 from pyfiglet import figlet_format
 
+console = Console()
 user = getlogin()
 hostname = gethostname()
 totalramus = virtual_memory()[3]/1000000
@@ -42,33 +44,40 @@ elif aptexists == True:
 elif dnfexists == True:
     pcmd = check_output(['dnf' , 'list' , 'installed']).decode('utf-8')
     pnum = len(pcmd.splitlines())  
+else:
+    pnum = None
 
 def ascii_art(distro):
     global asciiart , artprint
     asciiart = figlet_format(text=f"  {distro}")
     if distro=="Arch Linux" or distro=="Pop!_OS":
-        artprint = f"{colorama.Fore.CYAN} {asciiart} {colorama.Fore.RESET}"
+        artprint = f"[cyan] {asciiart} [/cyan]"
     elif distro=="Manjaro Linux" or distro=="Linux Mint" or distro=="Void Linux":
-        artprint = f"{colorama.Fore.GREEN} {asciiart} {colorama.Fore.RESET}"
+        artprint = f"[green] {asciiart} [/green]"
     elif distro=="EndeavourOS" or distro=="Gentoo":
-        artprint = f"{colorama.Fore.MAGENTA} {asciiart} {colorama.Fore.RESET}"
+        artprint = f"[magenta] {asciiart} [/magenta]"
     elif distro=="Ubuntu" or distro=="Debian":
-        artprint = f"{colorama.Fore.RED} {asciiart} {colorama.Fore.RESET}"
-    elif distro=="Alpine Linux" or distro=="Arco Linux" or distro=="Fedora Linux":
-        artprint = f"{colorama.Fore.BLUE} {asciiart} {colorama.Fore.RESET}"
+        artprint = f"[red] {asciiart} [/red]"
+    elif distro=="Alpine Linux" or distro=="ArcoLinux" or distro=="Fedora Linux":
+        artprint = f"[blue] {asciiart} [/blue]"
+    else:
+        artprint = asciiart
         
 ascii_art(distro)
-print(artprint)
+console.print(artprint)
 
-print('',' '+"\u001b[4m"+str(user)+str('@')+str(hostname)+'\u001b[0m')
-print(f"{colorama.Fore.RED}   Distro:-  {colorama.Fore.RESET} {distro} {cpuarch}")
-print(f"{colorama.Fore.GREEN}   CPU:- {colorama.Fore.RESET} {cpuname}")
-print(f"{colorama.Fore.BLUE}   Kernel:- {colorama.Fore.RESET} {kernver}")
-print(f"{colorama.Fore.YELLOW}   Packages:- {colorama.Fore.RESET} {pnum}")
-print(f"{colorama.Fore.CYAN}   Desktop Enviroment:- {colorama.Fore.RESET} {de}")
-print(f" {colorama.Fore.MAGENTA}  Memory:- {colorama.Fore.RESET} {int(totalramus)}MB/{int(totalram)}MB")
-print(f" {colorama.Fore.WHITE}  Shell:- {colorama.Fore.RESET} {sh}")
+table = Table()
 
-print()
-print(f"{colorama.Style.NORMAL}{colorama.Fore.RED}   {colorama.Fore.GREEN} {colorama.Fore.BLUE} {colorama.Fore.YELLOW} {colorama.Fore.CYAN} {colorama.Fore.MAGENTA} {colorama.Fore.WHITE} {colorama.Fore.RESET}")
-print(f"{colorama.Style.BRIGHT}{colorama.Fore.RED}   {colorama.Fore.GREEN} {colorama.Fore.BLUE} {colorama.Fore.YELLOW} {colorama.Fore.CYAN} {colorama.Fore.MAGENTA} {colorama.Fore.WHITE} {colorama.Fore.RESET}")
+table.add_column("info:-")
+table.add_column("output:-")
+table.add_row(f"[red]distro:- [/red]" , f"{distro} {cpuarch}")
+table.add_row("[green]cpu:- [/green]" , f"{cpuname}")
+table.add_row("[blue]kernel:- [/blue]" , f"{kernver}")
+table.add_row("[yellow]packages:- [/yellow]" , f"{pnum}")
+table.add_row("[cyan]de:-[/cyan]" , f"{de}")
+table.add_row("[magenta]memory:-[/magenta]" , f"{int(totalramus)}MB | {int(totalram)}MB")
+table.add_row("[red]sh:-[/red]" , f"{sh}" , end_section=True)
+table.add_row("[white]colors:-[/white]:-" , "[red] [/red][green] [/green][yellow] [/yellow][blue] [/blue][cyan] [/cyan][magenta] [/magenta]")
+
+
+console.print(table)
