@@ -1,4 +1,4 @@
-colorama
+rich
 psutil 
 platform 
 distro
