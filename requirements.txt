@@ -1,8 +1,5 @@
 rich
 psutil 
-platform 
 distro
 py-cpuinfo
-os
-subprocess
 pyfiglet
