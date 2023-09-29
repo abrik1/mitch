@@ -13,3 +13,4 @@ A simple fetch tool which is light and very customizable
 # Future:-
 
 - Pass arguements...
+- Make it smaller and faster
